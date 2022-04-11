@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [arr, setArr] = useState([]);
+  const B = ["Apple", "orange", "pineAapple", "Guavava", "Apple Good"];
+
+  useEffect(() => {
+    setArr(B);
+  }, []);
+
+  const X = (e) => {
+    let a = e.target.value;
+    let k = B.filter((ele, index) => {
+      var replace = `${a}`;
+      var re = new RegExp(replace, "g");
+
+      if (ele.match(re)) {
+        return true;
+      }
+      return false;
+    });
+    console.log(k);
+    setArr(k);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>list</h1>
+      <input type={"text"} onChange={X} />
+      <ol>
+        {arr.map((x) => {
+          return <li>{x}</li>;
+        })}
+      </ol>
+    </>
   );
 }
 
